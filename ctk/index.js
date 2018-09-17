@@ -99,7 +99,7 @@ function breakDownURL(URL){
 
 function getURL(){
     
-    rl.question('////////////////////////////////////////////////////////////////////////\nWhat is your full API address omiting the endpoint? example:\nhttp://tm-forum-open-api-reference-implementation.mybluemix.net/tmf-api/serviceQualityManagement/v2/serviceLevelObjective\nbecomes\nhttp://tm-forum-open-api-reference-implementation.mybluemix.net/tmf-api/serviceQualityManagement/v2/\n>', (answer) => {
+    rl.question('////////////////////////////////////////////////////////////////////////\nWhat is your full API address omiting the endpoint? example:\nhttps://tm-forum-open-api-reference-implementation.mybluemix.net/tmf-api/serviceQualityManagement/v2/serviceLevelObjective\nbecomes\nhttps://tm-forum-open-api-reference-implementation.mybluemix.net/tmf-api/serviceQualityManagement/v2/\n>', (answer) => {
     DefaultURL = answer;
     rl.close();
     isURLValid(answer);
