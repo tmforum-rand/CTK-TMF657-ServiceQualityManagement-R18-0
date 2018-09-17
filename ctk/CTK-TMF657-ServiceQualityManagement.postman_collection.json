@@ -1,0 +1,3276 @@
+{
+	"info": {
+		"_postman_id": "201b692c-58eb-4900-893d-7167f8e723f4",
+		"name": "CTK-TMF657-ServiceQualityManagement",
+		"description": "This is Swagger UI environment generated for the TMF Trouble Ticket specification",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "6bb6eac5-0437-4c30-9f7a-e80f78c43899",
+			"name": "TC_SQM1_N1 – Create new Service Level Objective with minimum required information",
+			"item": [
+				{
+					"_postman_id": "d291d748-43f7-481c-a4c4-6188fe240880",
+					"name": "/serviceLevelObjective",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "43f227b5-10ff-467f-aa43-9e5f9c8671eb",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test('Content-Type is present', function() { pm.response.to.have.header('Content-Type') });",
+									"pm.test('Content-Type is application/json', function() { pm.response.headers.has('application/json') });",
+									"//Response Code 201-Created",
+									"pm.test(\"Status code is 201 (Conformance Profile page 16)\", function () { pm.response.to.have.status(201); });",
+									"",
+									"",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function(instance, index) {",
+									"      ",
+									"      ",
+									"    pm.globals.set(\"IDSQM1\", instance.id);",
+									"    pm.globals.set(\"CONFORMANCETARGETSQM1\", instance.conformanceTarget);",
+									"    pm.globals.set(\"CONFORMANCECOMPARATORSQM1\", instance.conformanceComparator);",
+									"    pm.globals.set(\"HREFSQM1\", instance.href);",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'conformanceTarget', 'conformanceComparator','specParameter', 'id', 'href' ];",
+									"    pm.test('Instance ' +index+ ' has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceTarget attribute', function() { pm.expect(instance.conformanceTarget).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceComparator attribute', function() { pm.expect(instance.conformanceComparator).to.be.a('string'); });",
+									"    ",
+									"    pm.test(\"Location on header matches expected\", function (){",
+									"        pm.expect(pm.response.headers.get(\"Location\")).to.equal(request.url + \"/\" +pm.globals.get(\"IDSQM1\"));",
+									"    });",
+									"    ",
+									"",
+									"  });",
+									"}",
+									"else {",
+									"    var instance = pm.response.json();",
+									"    ",
+									"     pm.globals.set(\"IDSQM1\", instance.id);",
+									"    pm.globals.set(\"CONFORMANCETARGETSQM1\", instance.conformanceTarget);",
+									"    pm.globals.set(\"CONFORMANCECOMPARATORSQM1\", instance.conformanceComparator);",
+									"    pm.globals.set(\"HREFSQM1\", instance.href);",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'conformanceTarget', 'conformanceComparator','specParameter', 'id', 'href' ];",
+									"    pm.test('Instance has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceTarget attribute', function() { pm.expect(instance.conformanceTarget).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceComparator attribute', function() { pm.expect(instance.conformanceComparator).to.be.a('string'); });",
+									"    ",
+									"    pm.test(\"Location on header matches expected\", function (){",
+									"        pm.expect(pm.response.headers.get(\"Location\")).to.equal(request.url + \"/\" +pm.globals.get(\"IDSQM1\"));",
+									"    });",
+									"    ",
+									"}",
+									"",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"conformanceTarget\": \"target1\",\n\"conformanceComparator\":\">\",\n\"specParameter\":{\n\"name\":\"\",\n\"relatedEntity\":[{\n\"id\":\"e1\",\n\"href\":\"/dffjd\"\n}]\n}\n}"
+						},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelObjective",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelObjective"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "dcbe79e7-8923-47d2-b08d-aacb3a3e57cd",
+					"name": "/serviceLevelObjective/{{IDSQM1}}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0f6911ca-769a-4291-9783-e90c5cb945f4",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test('Content-Type is present', function() { pm.response.to.have.header('Content-Type') });",
+									"pm.test('Content-Type is application/json', function() { pm.response.headers.has('application/json') });",
+									"",
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+									"",
+									"",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function(instance, index) {",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'conformanceTarget', 'conformanceComparator','specParameter', 'id', 'href' ];",
+									"    pm.test('Instance ' +index+ ' has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceTarget attribute', function() { pm.expect(instance.conformanceTarget).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceComparator attribute', function() { pm.expect(instance.conformanceComparator).to.be.a('string'); });",
+									"    ",
+									"",
+									"  });",
+									"}",
+									"else {",
+									"    var instance = pm.response.json();",
+									"    ",
+									"",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'conformanceTarget', 'conformanceComparator','specParameter', 'id', 'href' ];",
+									"    pm.test('Instance has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceTarget attribute', function() { pm.expect(instance.conformanceTarget).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceComparator attribute', function() { pm.expect(instance.conformanceComparator).to.be.a('string'); });",
+									"    ",
+									"}",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"pm.test(\"ID1 found on body\", function () {",
+									"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"IDSQM1\"));",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelObjective/{{IDSQM1}}",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelObjective",
+								"{{IDSQM1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "47279a39-3a5d-48fe-9925-7ab4cb123f20",
+					"name": "/serviceLevelObjective",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0f6911ca-769a-4291-9783-e90c5cb945f4",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test('Content-Type is present', function() { pm.response.to.have.header('Content-Type') });",
+									"pm.test('Content-Type is application/json', function() { pm.response.headers.has('application/json') });",
+									"",
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+									"",
+									"",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function(instance, index) {",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'conformanceTarget', 'conformanceComparator','specParameter', 'id', 'href' ];",
+									"    pm.test('Instance ' +index+ ' has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceTarget attribute', function() { pm.expect(instance.conformanceTarget).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceComparator attribute', function() { pm.expect(instance.conformanceComparator).to.be.a('string'); });",
+									"    ",
+									"",
+									"  });",
+									"}",
+									"else {",
+									"    var instance = pm.response.json();",
+									"    ",
+									"",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'conformanceTarget', 'conformanceComparator','specParameter', 'id', 'href' ];",
+									"    pm.test('Instance has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceTarget attribute', function() { pm.expect(instance.conformanceTarget).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceComparator attribute', function() { pm.expect(instance.conformanceComparator).to.be.a('string'); });",
+									"    ",
+									"}",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"pm.test(\"ID1 found on body\", function () {",
+									"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"IDSQM1\"));",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelObjective",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelObjective"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"_postman_id": "393aba1e-6ee2-41da-a75c-947624525cc8",
+			"name": "TC_SQM1_N2 – Create new Service Level Objective with minimum set of parameters supported by server",
+			"item": [
+				{
+					"_postman_id": "06bec193-2169-43cc-8cf5-f248a150bd89",
+					"name": "/serviceLevelObjective",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fdcb6d93-eabb-4c6f-bbf2-9dff5528cdb3",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test('Content-Type is present', function() { pm.response.to.have.header('Content-Type') });",
+									"pm.test('Content-Type is application/json', function() { pm.response.headers.has('application/json') });",
+									"//Response Code 201-Created",
+									"pm.test(\"Status code is 201 (Conformance Profile page 16)\", function () { pm.response.to.have.status(201); });",
+									"",
+									"",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function(instance, index) {",
+									"      ",
+									"      ",
+									"    pm.globals.set(\"IDSQM2\", instance.id);",
+									"    pm.globals.set(\"CONFORMANCETARGETSQM2\", instance.conformanceTarget);",
+									"    pm.globals.set(\"CONFORMANCECOMPARATORSQM2\", instance.conformanceComparator);",
+									"    pm.globals.set(\"HREFSQM2\", instance.href);",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'conformanceTarget', 'conformanceComparator','specParameter', 'id', 'href' ];",
+									"    pm.test('Instance ' +index+ ' has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceTarget attribute', function() { pm.expect(instance.conformanceTarget).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceComparator attribute', function() { pm.expect(instance.conformanceComparator).to.be.a('string'); });",
+									"    ",
+									"    pm.test(\"Location on header matches expected\", function (){",
+									"        pm.expect(pm.response.headers.get(\"Location\")).to.equal(request.url + \"/\" +pm.globals.get(\"IDSQM2\"));",
+									"    });",
+									"    ",
+									"",
+									"  });",
+									"}",
+									"else {",
+									"    var instance = pm.response.json();",
+									"    ",
+									"     pm.globals.set(\"IDSQM2\", instance.id);",
+									"    pm.globals.set(\"CONFORMANCETARGETSQM2\", instance.conformanceTarget);",
+									"    pm.globals.set(\"CONFORMANCECOMPARATORSQM2\", instance.conformanceComparator);",
+									"    pm.globals.set(\"HREFSQM2\", instance.href);",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'conformanceTarget', 'conformanceComparator','specParameter', 'id', 'href' ];",
+									"    pm.test('Instance has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceTarget attribute', function() { pm.expect(instance.conformanceTarget).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceComparator attribute', function() { pm.expect(instance.conformanceComparator).to.be.a('string'); });",
+									"    ",
+									"    pm.test(\"Location on header matches expected\", function (){",
+									"        pm.expect(pm.response.headers.get(\"Location\")).to.equal(request.url + \"/\" +pm.globals.get(\"IDSQM2\"));",
+									"    });",
+									"    ",
+									"}",
+									"",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"conformanceTarget\": \"target2\",\n\t\"conformanceComparator\":\">\",\n\t\"specParameter\":{\n\t\t\"name\":\"\",\n\t\t\"relatedEntity\":[{\n\t\t\t\"id\":\"e1\",\n\t\t\t\"href\":\"/dffjd\"\n\t\t}]\n\t},\n\t\"name\":\"test\"\n}"
+						},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelObjective",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelObjective"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "ade79ee2-4cc0-4d16-9e40-79947f2444d3",
+					"name": "/serviceLevelObjective/{{IDSQM2}}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "46d40f85-4241-4254-8c9d-fb9b12a09684",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test('Content-Type is present', function() { pm.response.to.have.header('Content-Type') });",
+									"pm.test('Content-Type is application/json', function() { pm.response.headers.has('application/json') });",
+									"",
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+									"",
+									"",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function(instance, index) {",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'conformanceTarget', 'conformanceComparator','specParameter', 'id', 'href' ];",
+									"    pm.test('Instance ' +index+ ' has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceTarget attribute', function() { pm.expect(instance.conformanceTarget).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceComparator attribute', function() { pm.expect(instance.conformanceComparator).to.be.a('string'); });",
+									"    ",
+									"",
+									"  });",
+									"}",
+									"else {",
+									"    var instance = pm.response.json();",
+									"    ",
+									"",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'conformanceTarget', 'conformanceComparator','specParameter', 'id', 'href' ];",
+									"    pm.test('Instance has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceTarget attribute', function() { pm.expect(instance.conformanceTarget).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceComparator attribute', function() { pm.expect(instance.conformanceComparator).to.be.a('string'); });",
+									"    ",
+									"}",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"pm.test(\"ID2 found on body\", function () {",
+									"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"IDSQM2\"));",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelObjective/{{IDSQM2}}",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelObjective",
+								"{{IDSQM2}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "55c8056b-4699-4906-a140-7dcc7d5f7cf8",
+					"name": "/serviceLevelObjective",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "18c962a8-eb94-4634-899c-a144f85935f5",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test('Content-Type is present', function() { pm.response.to.have.header('Content-Type') });",
+									"pm.test('Content-Type is application/json', function() { pm.response.headers.has('application/json') });",
+									"",
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+									"",
+									"",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function(instance, index) {",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'conformanceTarget', 'conformanceComparator','specParameter', 'id', 'href' ];",
+									"    pm.test('Instance ' +index+ ' has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceTarget attribute', function() { pm.expect(instance.conformanceTarget).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceComparator attribute', function() { pm.expect(instance.conformanceComparator).to.be.a('string'); });",
+									"    ",
+									"    ",
+									"",
+									"    if (instance.id == pm.globals.get(\"IDSQM1\")){",
+									"        pm.test('Reponse ID matches POST', function(){",
+									"           pm.expect(instance.id).to.eql(pm.globals.get(\"IDSQM1\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Target matches POST', function(){",
+									"           pm.expect(instance.conformanceTarget).to.eql(pm.globals.get(\"CONFORMANCETARGETSQM1\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Comparator matches POST', function(){",
+									"           pm.expect(instance.conformanceComparator).to.eql(pm.globals.get(\"CONFORMANCECOMPARATORSQM1\")); ",
+									"        });",
+									"        pm.test('Reponse HREF matches POST', function(){",
+									"           pm.expect(instance.href).to.eql(pm.globals.get(\"HREFSQM1\")); ",
+									"        });",
+									"        ",
+									"    }",
+									"    if (instance.id == pm.globals.get(\"IDSQM2\")){",
+									"        pm.test('Reponse ID matches POST', function(){",
+									"           pm.expect(instance.id).to.eql(pm.globals.get(\"IDSQM2\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Target matches POST', function(){",
+									"           pm.expect(instance.conformanceTarget).to.eql(pm.globals.get(\"CONFORMANCETARGETSQM2\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Comparator matches POST', function(){",
+									"           pm.expect(instance.conformanceComparator).to.eql(pm.globals.get(\"CONFORMANCECOMPARATORSQM2\")); ",
+									"        });",
+									"        pm.test('Reponse HREF matches POST', function(){",
+									"           pm.expect(instance.href).to.eql(pm.globals.get(\"HREFSQM2\")); ",
+									"        });",
+									"        ",
+									"    }",
+									"",
+									"  });",
+									"}",
+									"else {",
+									"    var instance = pm.response.json();",
+									"    ",
+									"",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'conformanceTarget', 'conformanceComparator','specParameter', 'id', 'href' ];",
+									"    pm.test('Instance has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceTarget attribute', function() { pm.expect(instance.conformanceTarget).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceComparator attribute', function() { pm.expect(instance.conformanceComparator).to.be.a('string'); });",
+									"    ",
+									"    ",
+									"",
+									"    if (instance.id == pm.globals.get(\"IDSQM1\")){",
+									"        pm.test('Reponse ID matches POST', function(){",
+									"           pm.expect(instance.id).to.eql(pm.globals.get(\"IDSQM1\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Target matches POST', function(){",
+									"           pm.expect(instance.conformanceTarget).to.eql(pm.globals.get(\"CONFORMANCETARGETSQM1\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Comparator matches POST', function(){",
+									"           pm.expect(instance.conformanceComparator).to.eql(pm.globals.get(\"CONFORMANCECOMPARATORSQM1\")); ",
+									"        });",
+									"        pm.test('Reponse HREF matches POST', function(){",
+									"           pm.expect(instance.href).to.eql(pm.globals.get(\"HREFSQM1\")); ",
+									"        });",
+									"        ",
+									"    }",
+									"    if (instance.id == pm.globals.get(\"IDSQM2\")){",
+									"        pm.test('Reponse ID matches POST', function(){",
+									"           pm.expect(instance.id).to.eql(pm.globals.get(\"IDSQM2\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Target matches POST', function(){",
+									"           pm.expect(instance.conformanceTarget).to.eql(pm.globals.get(\"CONFORMANCETARGETSQM2\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Comparator matches POST', function(){",
+									"           pm.expect(instance.conformanceComparator).to.eql(pm.globals.get(\"CONFORMANCECOMPARATORSQM2\")); ",
+									"        });",
+									"        pm.test('Reponse HREF matches POST', function(){",
+									"           pm.expect(instance.href).to.eql(pm.globals.get(\"HREFSQM2\")); ",
+									"        });",
+									"    }",
+									"    ",
+									"}",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"pm.test(\"ID1 found on body\", function () {",
+									"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"IDSQM1\"));",
+									"});",
+									"",
+									"pm.test(\"ID2 found on body\", function () {",
+									"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"IDSQM2\"));",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelObjective",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelObjective"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"_postman_id": "9b4bcabe-c049-4301-8ea8-5c7e4df4fcff",
+			"name": "TC_SQM1_N3 – Search for ServiceLevelObjectives with specific characteristics",
+			"item": [
+				{
+					"_postman_id": "e9394c9f-9ff1-4e09-9836-06d8168f01f4",
+					"name": "/serviceLevelObjective",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5a4b2770-c04f-4e8d-8642-12a5e490ff56",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test('Content-Type is present', function() { pm.response.to.have.header('Content-Type') });",
+									"pm.test('Content-Type is application/json', function() { pm.response.headers.has('application/json') });",
+									"",
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+									"",
+									"",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function(instance, index) {",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'conformanceTarget', 'conformanceComparator','specParameter', 'id', 'href' ];",
+									"    pm.test('Instance ' +index+ ' has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceTarget attribute', function() { pm.expect(instance.conformanceTarget).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceComparator attribute', function() { pm.expect(instance.conformanceComparator).to.be.a('string'); });",
+									"    ",
+									"    ",
+									"    /*    pm.globals.set(\"IDSQM2\", instance.id);",
+									"    pm.globals.set(\"CONFORMANCETARGETSQM2\", instance.conformanceTarget);",
+									"    pm.globals.set(\"CONFORMANCECOMPARATORSQM2\", instance.conformanceComparator);",
+									"    pm.globals.set(\"HREFSQM2\", instance.href); */",
+									"    if (instance.id == pm.globals.get(\"IDSQM1\")){",
+									"        pm.test('Reponse ID matches POST', function(){",
+									"           pm.expect(instance.id).to.eql(pm.globals.get(\"IDSQM1\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Target matches POST', function(){",
+									"           pm.expect(instance.conformanceTarget).to.eql(pm.globals.get(\"CONFORMANCETARGETSQM1\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Comparator matches POST', function(){",
+									"           pm.expect(instance.conformanceComparator).to.eql(pm.globals.get(\"CONFORMANCECOMPARATORSQM1\")); ",
+									"        });",
+									"        pm.test('Reponse HREF matches POST', function(){",
+									"           pm.expect(instance.href).to.eql(pm.globals.get(\"HREFSQM1\")); ",
+									"        });",
+									"        ",
+									"    }",
+									"    if (instance.id == pm.globals.get(\"IDSQM2\")){",
+									"        pm.test('Reponse ID matches POST', function(){",
+									"           pm.expect(instance.id).to.eql(pm.globals.get(\"IDSQM2\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Target matches POST', function(){",
+									"           pm.expect(instance.conformanceTarget).to.eql(pm.globals.get(\"CONFORMANCETARGETSQM2\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Comparator matches POST', function(){",
+									"           pm.expect(instance.conformanceComparator).to.eql(pm.globals.get(\"CONFORMANCECOMPARATORSQM2\")); ",
+									"        });",
+									"        pm.test('Reponse HREF matches POST', function(){",
+									"           pm.expect(instance.href).to.eql(pm.globals.get(\"HREFSQM2\")); ",
+									"        });",
+									"        ",
+									"    }",
+									"",
+									"  });",
+									"}",
+									"else {",
+									"    var instance = pm.response.json();",
+									"    ",
+									"",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'conformanceTarget', 'conformanceComparator','specParameter', 'id', 'href' ];",
+									"    pm.test('Instance has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceTarget attribute', function() { pm.expect(instance.conformanceTarget).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceComparator attribute', function() { pm.expect(instance.conformanceComparator).to.be.a('string'); });",
+									"    ",
+									"}",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"pm.test(\"ID1 found on body\", function () {",
+									"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"IDSQM1\"));",
+									"});",
+									"",
+									"pm.test(\"ID2 found on body\", function () {",
+									"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"IDSQM2\"));",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelObjective",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelObjective"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "07820631-97ac-443e-8594-57b32f7f1378",
+					"name": "/serviceLevelObjective?conformanceTarget=target1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "be93e375-da04-4a6b-af8b-db386c384339",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test('Content-Type is present', function() { pm.response.to.have.header('Content-Type') });",
+									"pm.test('Content-Type is application/json', function() { pm.response.headers.has('application/json') });",
+									"",
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+									"",
+									"",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function(instance, index) {",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'conformanceTarget', 'conformanceComparator','specParameter', 'id', 'href' ];",
+									"    pm.test('Instance ' +index+ ' has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceTarget attribute', function() { pm.expect(instance.conformanceTarget).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceComparator attribute', function() { pm.expect(instance.conformanceComparator).to.be.a('string'); });",
+									"    ",
+									"    ",
+									"",
+									"    if (instance.id == pm.globals.get(\"IDSQM1\")){",
+									"        pm.test('Reponse ID matches POST', function(){",
+									"           pm.expect(instance.id).to.eql(pm.globals.get(\"IDSQM1\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Target matches POST', function(){",
+									"           pm.expect(instance.conformanceTarget).to.eql(pm.globals.get(\"CONFORMANCETARGETSQM1\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Comparator matches POST', function(){",
+									"           pm.expect(instance.conformanceComparator).to.eql(pm.globals.get(\"CONFORMANCECOMPARATORSQM1\")); ",
+									"        });",
+									"        pm.test('Reponse HREF matches POST', function(){",
+									"           pm.expect(instance.href).to.eql(pm.globals.get(\"HREFSQM1\")); ",
+									"        });",
+									"        ",
+									"    }",
+									"    if (instance.id == pm.globals.get(\"IDSQM2\")){",
+									"        pm.test('ID2 should not be returned by this GET', function(){",
+									"           pm.expect(0).to.eql(1); ",
+									"        });",
+									"    }",
+									"",
+									"  });",
+									"}",
+									"else {",
+									"    var instance = pm.response.json();",
+									"    ",
+									"",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'conformanceTarget', 'conformanceComparator','specParameter', 'id', 'href' ];",
+									"    pm.test('Instance has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceTarget attribute', function() { pm.expect(instance.conformanceTarget).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceComparator attribute', function() { pm.expect(instance.conformanceComparator).to.be.a('string'); });",
+									"    ",
+									"    ",
+									"",
+									"    if (instance.id == pm.globals.get(\"IDSQM1\")){",
+									"        pm.test('Reponse ID matches POST', function(){",
+									"           pm.expect(instance.id).to.eql(pm.globals.get(\"IDSQM1\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Target matches POST', function(){",
+									"           pm.expect(instance.conformanceTarget).to.eql(pm.globals.get(\"CONFORMANCETARGETSQM1\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Comparator matches POST', function(){",
+									"           pm.expect(instance.conformanceComparator).to.eql(pm.globals.get(\"CONFORMANCECOMPARATORSQM1\")); ",
+									"        });",
+									"        pm.test('Reponse HREF matches POST', function(){",
+									"           pm.expect(instance.href).to.eql(pm.globals.get(\"HREFSQM1\")); ",
+									"        });",
+									"        ",
+									"    }",
+									"    if (instance.id == pm.globals.get(\"IDSQM2\")){",
+									"        pm.test('ID2 should not be returned by this GET', function(){",
+									"           pm.expect(0).to.eql(1); ",
+									"        });",
+									"    }",
+									"    ",
+									"}",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"pm.test(\"ID1 found on body\", function () {",
+									"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"IDSQM1\"));",
+									"});",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelObjective?conformanceTarget=target1",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelObjective"
+							],
+							"query": [
+								{
+									"key": "conformanceTarget",
+									"value": "target1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "ea8b6168-29b9-4fcb-9f5e-4ed6d2d4c2f2",
+					"name": "/serviceLevelObjective? conformanceComparator=>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "215af4b5-ba0e-4e94-a33b-9c73ea92062c",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test('Content-Type is present', function() { pm.response.to.have.header('Content-Type') });",
+									"pm.test('Content-Type is application/json', function() { pm.response.headers.has('application/json') });",
+									"",
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+									"",
+									"",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function(instance, index) {",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'conformanceTarget', 'conformanceComparator','specParameter', 'id', 'href' ];",
+									"    pm.test('Instance ' +index+ ' has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceTarget attribute', function() { pm.expect(instance.conformanceTarget).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceComparator attribute', function() { pm.expect(instance.conformanceComparator).to.be.a('string'); });",
+									"    ",
+									"    ",
+									"",
+									"    if (instance.id == pm.globals.get(\"IDSQM1\")){",
+									"        pm.test('Reponse ID matches POST', function(){",
+									"           pm.expect(instance.id).to.eql(pm.globals.get(\"IDSQM1\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Target matches POST', function(){",
+									"           pm.expect(instance.conformanceTarget).to.eql(pm.globals.get(\"CONFORMANCETARGETSQM1\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Comparator matches POST', function(){",
+									"           pm.expect(instance.conformanceComparator).to.eql(pm.globals.get(\"CONFORMANCECOMPARATORSQM1\")); ",
+									"        });",
+									"        pm.test('Reponse HREF matches POST', function(){",
+									"           pm.expect(instance.href).to.eql(pm.globals.get(\"HREFSQM1\")); ",
+									"        });",
+									"        ",
+									"    }",
+									"    if (instance.id == pm.globals.get(\"IDSQM2\")){",
+									"        pm.test('Reponse ID matches POST', function(){",
+									"           pm.expect(instance.id).to.eql(pm.globals.get(\"IDSQM2\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Target matches POST', function(){",
+									"           pm.expect(instance.conformanceTarget).to.eql(pm.globals.get(\"CONFORMANCETARGETSQM2\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Comparator matches POST', function(){",
+									"           pm.expect(instance.conformanceComparator).to.eql(pm.globals.get(\"CONFORMANCECOMPARATORSQM2\")); ",
+									"        });",
+									"        pm.test('Reponse HREF matches POST', function(){",
+									"           pm.expect(instance.href).to.eql(pm.globals.get(\"HREFSQM2\")); ",
+									"        });",
+									"        ",
+									"    }",
+									"",
+									"  });",
+									"}",
+									"else {",
+									"    var instance = pm.response.json();",
+									"    ",
+									"",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'conformanceTarget', 'conformanceComparator','specParameter', 'id', 'href' ];",
+									"    pm.test('Instance has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceTarget attribute', function() { pm.expect(instance.conformanceTarget).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceComparator attribute', function() { pm.expect(instance.conformanceComparator).to.be.a('string'); });",
+									"    ",
+									"    ",
+									"",
+									"    if (instance.id == pm.globals.get(\"IDSQM1\")){",
+									"        pm.test('Reponse ID matches POST', function(){",
+									"           pm.expect(instance.id).to.eql(pm.globals.get(\"IDSQM1\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Target matches POST', function(){",
+									"           pm.expect(instance.conformanceTarget).to.eql(pm.globals.get(\"CONFORMANCETARGETSQM1\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Comparator matches POST', function(){",
+									"           pm.expect(instance.conformanceComparator).to.eql(pm.globals.get(\"CONFORMANCECOMPARATORSQM1\")); ",
+									"        });",
+									"        pm.test('Reponse HREF matches POST', function(){",
+									"           pm.expect(instance.href).to.eql(pm.globals.get(\"HREFSQM1\")); ",
+									"        });",
+									"        ",
+									"    }",
+									"    if (instance.id == pm.globals.get(\"IDSQM2\")){",
+									"        pm.test('Reponse ID matches POST', function(){",
+									"           pm.expect(instance.id).to.eql(pm.globals.get(\"IDSQM2\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Target matches POST', function(){",
+									"           pm.expect(instance.conformanceTarget).to.eql(pm.globals.get(\"CONFORMANCETARGETSQM2\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Comparator matches POST', function(){",
+									"           pm.expect(instance.conformanceComparator).to.eql(pm.globals.get(\"CONFORMANCECOMPARATORSQM2\")); ",
+									"        });",
+									"        pm.test('Reponse HREF matches POST', function(){",
+									"           pm.expect(instance.href).to.eql(pm.globals.get(\"HREFSQM2\")); ",
+									"        });",
+									"    }",
+									"    ",
+									"}",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"pm.test(\"ID1 found on body\", function () {",
+									"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"IDSQM1\"));",
+									"});",
+									"",
+									"pm.test(\"ID2 found on body\", function () {",
+									"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"IDSQM2\"));",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelObjective?conformanceComparator=>",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelObjective"
+							],
+							"query": [
+								{
+									"key": "conformanceComparator",
+									"value": ">"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"_postman_id": "8e552779-3296-4dc9-ae6f-6fe44d8d27d7",
+			"name": "TC_SQM1_N4 – Filtered retrieval of ServiceLevelObjectives",
+			"item": [
+				{
+					"_postman_id": "93aca166-9670-4995-83d3-dff630f74924",
+					"name": "/serviceLevelObjective/{{IDSQM1}}?fields=conformanceTarget",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "24ff5d23-cd33-44df-a76d-714f161f5a23",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test('Content-Type is present', function() { pm.response.to.have.header('Content-Type') });",
+									"pm.test('Content-Type is application/json', function() { pm.response.headers.has('application/json') });",
+									"",
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+									"",
+									"",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function(instance, index) {",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'conformanceTarget'];",
+									"    pm.test('Instance ' +index+ ' has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Only conformanceTarget on response', function(){",
+									"       pm.expect(Object.keys(instance).length).to.eql(requiredAttributes.length);",
+									"    });",
+									"    ",
+									"    pm.test('Response has conformanceTarget attribute', function() { pm.expect(instance.conformanceTarget).to.be.a('string'); });",
+									"    ",
+									"",
+									"  ",
+									"    pm.test('Reponse Conformance Target matches POST', function(){",
+									"       pm.expect(instance.conformanceTarget).to.eql(pm.globals.get(\"CONFORMANCETARGETSQM1\")); ",
+									"    });",
+									"",
+									"",
+									"",
+									"  });",
+									"}",
+									"else {",
+									"    var instance = pm.response.json();",
+									"    ",
+									"    ",
+									"    ",
+									"",
+									"    var requiredAttributes = [ 'conformanceTarget'];",
+									"    pm.test('Instance has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has conformanceTarget attribute', function() { pm.expect(instance.conformanceTarget).to.be.a('string'); });",
+									"    ",
+									"     pm.test('Reponse Conformance Target matches POST', function(){",
+									"       pm.expect(instance.conformanceTarget).to.eql(pm.globals.get(\"CONFORMANCETARGETSQM1\")); ",
+									"    });",
+									"    ",
+									"    pm.test('Only conformanceTarget on response', function(){",
+									"       pm.expect(Object.keys(instance).length).to.eql(requiredAttributes.length);",
+									"    });",
+									"    ",
+									"}",
+									"",
+									"",
+									"",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelObjective/{{IDSQM1}}?fields=conformanceTarget",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelObjective",
+								"{{IDSQM1}}"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "conformanceTarget"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "3023f3f1-461e-4354-b288-b76e3cba88c4",
+					"name": "/serviceLevelObjective/{{IDSQM2}}?fields=conformanceComparator,conformanceTarget",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a3a7c387-db1d-4b20-902b-d1c512b67475",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test('Content-Type is present', function() { pm.response.to.have.header('Content-Type') });",
+									"pm.test('Content-Type is application/json', function() { pm.response.headers.has('application/json') });",
+									"",
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+									"",
+									"",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function(instance, index) {",
+									"    ",
+									"    ",
+									"    var requiredAttributes = ['conformanceComparator', 'conformanceTarget'];",
+									"    pm.test('Instance ' +index+ ' has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    pm.test('Only conformanceTarget and conformanceComparator on response', function(){",
+									"       pm.expect(Object.keys(instance).length).to.eql(requiredAttributes.length);",
+									"    });",
+									"",
+									"    ",
+									"    pm.test('Response has conformanceTarget attribute', function() { pm.expect(instance.conformanceTarget).to.be.a('string'); });",
+									"    pm.test('Response has conformanceComparator attribute', function() { pm.expect(instance.conformanceComparator).to.be.a('string'); });",
+									"",
+									"  ",
+									"    pm.test('Reponse Conformance Target matches POST', function(){",
+									"       pm.expect(instance.conformanceTarget).to.eql(pm.globals.get(\"CONFORMANCETARGETSQM2\")); ",
+									"    });",
+									"",
+									"    ",
+									"    pm.test('Reponse Conformance Comparator matches POST', function(){",
+									"       pm.expect(instance.conformanceComparator).to.eql(pm.globals.get(\"CONFORMANCECOMPARATORSQM2\")); ",
+									"    });",
+									"",
+									"  ",
+									"});",
+									"}",
+									"",
+									"else {",
+									"    var instance = pm.response.json();",
+									"    ",
+									"",
+									"    ",
+									"    ",
+									"    var requiredAttributes = ['conformanceComparator', 'conformanceTarget'];",
+									"    pm.test('Instance has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"",
+									"    pm.test('Only conformanceTarget and conformanceComparator on response', function(){",
+									"       pm.expect(Object.keys(instance).length).to.eql(requiredAttributes.length);",
+									"    });",
+									"    ",
+									"     pm.test('Response has conformanceTarget attribute', function() { pm.expect(instance.conformanceTarget).to.be.a('string'); });",
+									"    pm.test('Response has conformanceComparator attribute', function() { pm.expect(instance.conformanceComparator).to.be.a('string'); });",
+									"",
+									"  ",
+									"    pm.test('Reponse Conformance Target matches POST', function(){",
+									"       pm.expect(instance.conformanceTarget).to.eql(pm.globals.get(\"CONFORMANCETARGETSQM2\")); ",
+									"    });",
+									"",
+									"    ",
+									"    pm.test('Reponse Conformance Comparator matches POST', function(){",
+									"       pm.expect(instance.conformanceComparator).to.eql(pm.globals.get(\"CONFORMANCECOMPARATORSQM2\")); ",
+									"    });",
+									"}",
+									"",
+									"",
+									"",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelObjective/{{IDSQM2}}?fields=conformanceComparator,conformanceTarget",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelObjective",
+								"{{IDSQM2}}"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "conformanceComparator,conformanceTarget"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"_postman_id": "3b5a05f3-0390-40a1-8478-a9f8e6f778f9",
+			"name": "TC_SQM1_N5 – Filtered Search and Filtered data response",
+			"item": [
+				{
+					"_postman_id": "dbd7f2d3-4c7c-4544-9461-4195e25c855a",
+					"name": "/serviceLevelObjective?conformanceTarget=target2&conformanceComparator=\">\"",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e4226e73-c81e-4fe3-a53e-55cd24e9beef",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test('Content-Type is present', function() { pm.response.to.have.header('Content-Type') });",
+									"pm.test('Content-Type is application/json', function() { pm.response.headers.has('application/json') });",
+									"",
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+									"",
+									"",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function(instance, index) {",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'conformanceTarget', 'conformanceComparator','specParameter', 'id', 'href' ];",
+									"    pm.test('Instance ' +index+ ' has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceTarget attribute', function() { pm.expect(instance.conformanceTarget).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceComparator attribute', function() { pm.expect(instance.conformanceComparator).to.be.a('string'); });",
+									"    ",
+									"    if (instance.id == pm.globals.get(\"IDSQM1\")){",
+									"        ",
+									"    }",
+									"",
+									"  });",
+									"}",
+									"else {",
+									"    var instance = pm.response.json();",
+									"    ",
+									"",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'conformanceTarget', 'conformanceComparator','specParameter', 'id', 'href' ];",
+									"    pm.test('Instance has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceTarget attribute', function() { pm.expect(instance.conformanceTarget).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has conformanceComparator attribute', function() { pm.expect(instance.conformanceComparator).to.be.a('string'); });",
+									"    ",
+									"}",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"pm.test(\"ID2 found on body\", function () {",
+									"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"IDSQM2\"));",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelObjective?conformanceTarget=target2&conformanceComparator=\">\"",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelObjective"
+							],
+							"query": [
+								{
+									"key": "conformanceTarget",
+									"value": "target2"
+								},
+								{
+									"key": "conformanceComparator",
+									"value": "\">\""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "d18c7fc2-cb98-4d2e-a7ea-e41dd0f10d2d",
+					"name": "/serviceLevelObjective/{{IDSQM2}}?fields=conformanceComparator,conformanceTarget",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a3a7c387-db1d-4b20-902b-d1c512b67475",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test('Content-Type is present', function() { pm.response.to.have.header('Content-Type') });",
+									"pm.test('Content-Type is application/json', function() { pm.response.headers.has('application/json') });",
+									"",
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+									"",
+									"",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function(instance, index) {",
+									"    ",
+									"    ",
+									"    var requiredAttributes = ['conformanceComparator', 'conformanceTarget'];",
+									"    pm.test('Instance ' +index+ ' has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    pm.test('Only conformanceTarget and conformanceComparator on response', function(){",
+									"       pm.expect(Object.keys(instance).length).to.eql(requiredAttributes.length);",
+									"    });",
+									"",
+									"    ",
+									"    pm.test('Response has conformanceTarget attribute', function() { pm.expect(instance.conformanceTarget).to.be.a('string'); });",
+									"    pm.test('Response has conformanceComparator attribute', function() { pm.expect(instance.conformanceComparator).to.be.a('string'); });",
+									"",
+									"  ",
+									"    pm.test('Reponse Conformance Target matches POST', function(){",
+									"       pm.expect(instance.conformanceTarget).to.eql(pm.globals.get(\"CONFORMANCETARGETSQM2\")); ",
+									"    });",
+									"",
+									"    ",
+									"    pm.test('Reponse Conformance Comparator matches POST', function(){",
+									"       pm.expect(instance.conformanceComparator).to.eql(pm.globals.get(\"CONFORMANCECOMPARATORSQM2\")); ",
+									"    });",
+									"",
+									"  ",
+									"});",
+									"}",
+									"",
+									"else {",
+									"    var instance = pm.response.json();",
+									"    ",
+									"",
+									"    ",
+									"    ",
+									"    var requiredAttributes = ['conformanceComparator', 'conformanceTarget'];",
+									"    pm.test('Instance has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"",
+									"    pm.test('Only conformanceTarget and conformanceComparator on response', function(){",
+									"       pm.expect(Object.keys(instance).length).to.eql(requiredAttributes.length);",
+									"    });",
+									"    ",
+									"     pm.test('Response has conformanceTarget attribute', function() { pm.expect(instance.conformanceTarget).to.be.a('string'); });",
+									"    pm.test('Response has conformanceComparator attribute', function() { pm.expect(instance.conformanceComparator).to.be.a('string'); });",
+									"",
+									"  ",
+									"    pm.test('Reponse Conformance Target matches POST', function(){",
+									"       pm.expect(instance.conformanceTarget).to.eql(pm.globals.get(\"CONFORMANCETARGETSQM2\")); ",
+									"    });",
+									"",
+									"    ",
+									"    pm.test('Reponse Conformance Comparator matches POST', function(){",
+									"       pm.expect(instance.conformanceComparator).to.eql(pm.globals.get(\"CONFORMANCECOMPARATORSQM2\")); ",
+									"    });",
+									"}",
+									"",
+									"",
+									"",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelObjective/{{IDSQM2}}?fields=conformanceComparator,conformanceTarget",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelObjective",
+								"{{IDSQM2}}"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "conformanceComparator,conformanceTarget"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"_postman_id": "6f546b05-4a2c-4033-ac3f-97bbfd42b5a1",
+			"name": "TC_SQM1_E1 – Unknown Service Level Objective identifier",
+			"item": [
+				{
+					"_postman_id": "e77a236f-e868-4072-a435-5efb3f467556",
+					"name": "/serviceLevelObjective?conformanceTarget=target2&conformanceComparator=\">\"",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4cdf9d75-8ed9-4d4d-976c-ac4074fab759",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () { pm.response.to.have.status(404); });",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelObjective/123414213123",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelObjective",
+								"123414213123"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"_postman_id": "963af867-472c-4aed-8a48-cbc8d9eb12b1",
+			"name": "TC_SQM1_E2 – Invalid Request – Missing mandatory parameter",
+			"item": [
+				{
+					"_postman_id": "84521286-babb-4d8b-ba0d-24162ddb5e8a",
+					"name": "/serviceLevelObjective",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d56ef0c6-cb0d-4012-8653-51465007b94e",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () { pm.response.to.have.status(400); });",
+									"",
+									"",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"conformanceComparator\":\">\",\n\"specParameter\":{\n\"name\":\"\",\n\"relatedEntity\":[{\n\"id\":\"e1\",\n\"href\":\"/dffjd\"}]\n}\n}"
+						},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelObjective",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelObjective"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"_postman_id": "766691d1-b74a-41e7-82da-7905028809da",
+			"name": "TC_SQM1_E3 – Invalid Request – Missing parameter mandatory in specParameter",
+			"item": [
+				{
+					"_postman_id": "704f6218-bbf7-447f-8818-d2f3e99e80d6",
+					"name": "/serviceLevelObjective",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d56ef0c6-cb0d-4012-8653-51465007b94e",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () { pm.response.to.have.status(400); });",
+									"",
+									"",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"conformanceTarget\": \"target1\",\n\"conformanceComparator\":\">\",\n\"specParameter\":{\n\"relatedEntity\":[{\n\"id\":\"e1\",\n\"href\":\"/dffjd\"\n}]\n}\n}"
+						},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelObjective",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelObjective"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"_postman_id": "6bb6fea8-8413-4258-bed4-3a490b2ea2c5",
+			"name": "TC_SQM2_N1 – Create new Service Level Specification with minimum required information",
+			"item": [
+				{
+					"_postman_id": "64f42251-13cf-4de5-9f91-79c0a2803425",
+					"name": "/serviceLevelSpecification",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "13ff71b5-0a83-4be4-beaf-cebc5dac60fa",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test('Content-Type is present', function() { pm.response.to.have.header('Content-Type') });",
+									"pm.test('Content-Type is application/json', function() { pm.response.headers.has('application/json') });",
+									"//Response Code 201-Created",
+									"pm.test(\"Status code is 201 (Conformance Profile page 16)\", function () { pm.response.to.have.status(201); });",
+									"",
+									"",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function(instance, index) {",
+									"      ",
+									"      ",
+									"    pm.globals.set(\"IDSQMS1\", instance.id);",
+									"    pm.globals.set(\"NAMESQMS1\", instance.name);",
+									"    pm.globals.set(\"HREFSQMS1\", instance.href);",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'objective', 'name', 'id', 'href' ];",
+									"    pm.test('Instance ' +index+ ' has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has objective attribute', function() { pm.expect(instance.objective).to.be.a('array'); });",
+									"    ",
+									"    pm.test('Response has name attribute', function() { pm.expect(instance.name).to.be.a('string'); });",
+									"    ",
+									"    pm.test(\"Location on header matches expected\", function (){",
+									"        pm.expect(pm.response.headers.get(\"Location\")).to.equal(request.url + \"/\" +pm.globals.get(\"IDSQMS1\"));",
+									"    });",
+									"    ",
+									"",
+									"  });",
+									"}",
+									"else {",
+									"    var instance = pm.response.json();",
+									"    ",
+									"    pm.globals.set(\"IDSQMS1\", instance.id);",
+									"    pm.globals.set(\"NAMESQMS1\", instance.name);",
+									"    pm.globals.set(\"HREFSQMS1\", instance.href);",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'objective', 'name', 'id', 'href' ];",
+									"    pm.test('Instance has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"      ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has objective attribute', function() { pm.expect(instance.objective).to.be.a('array'); });",
+									"    ",
+									"    pm.test('Response has name attribute', function() { pm.expect(instance.name).to.be.a('string'); });",
+									"    ",
+									"    pm.test(\"Location on header matches expected\", function (){",
+									"        pm.expect(pm.response.headers.get(\"Location\")).to.equal(request.url + \"/\" +pm.globals.get(\"IDSQMS1\"));",
+									"    });",
+									"}",
+									"",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"serviceLevelSpecification1\",\n\t\"objective\":[{\n\t\t\"id\":\"object1\",\n\t\t\"href\":\"/object1\"\n\t}]\n}"
+						},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelSpecification",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelSpecification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "a21d791f-e44c-4252-8302-338db41c7ec9",
+					"name": "/serviceLevelSpecification/{{IDSQMS1}}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "33e12bcc-527d-4e5f-be0f-f59262bb2658",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test('Content-Type is present', function() { pm.response.to.have.header('Content-Type') });",
+									"pm.test('Content-Type is application/json', function() { pm.response.headers.has('application/json') });",
+									"",
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function(instance, index) {",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'objective', 'name', 'id', 'href' ];",
+									"    pm.test('Instance ' +index+ ' has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has objective attribute', function() { pm.expect(instance.objective).to.be.a('array'); });",
+									"    ",
+									"    pm.test('Response has name attribute', function() { pm.expect(instance.name).to.be.a('string'); });",
+									"    ",
+									"",
+									"    ",
+									"",
+									"  });",
+									"}",
+									"else {",
+									"    var instance = pm.response.json();",
+									"    ",
+									"    var requiredAttributes = [ 'objective', 'name', 'id', 'href' ];",
+									"    pm.test('Instance has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"      ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has objective attribute', function() { pm.expect(instance.objective).to.be.a('array'); });",
+									"    ",
+									"    pm.test('Response has name attribute', function() { pm.expect(instance.name).to.be.a('string'); });",
+									"    ",
+									"",
+									"}",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"pm.test(\"ID1 found on body\", function () {",
+									"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"IDSQMS1\"));",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelSpecification/{{IDSQMS1}}",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelSpecification",
+								"{{IDSQMS1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "b91b85fa-1959-4a64-b53d-12bd53d36ebb",
+					"name": "/serviceLevelSpecification",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "50403bbb-0eb4-4114-b623-987d9d3433a8",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test('Content-Type is present', function() { pm.response.to.have.header('Content-Type') });",
+									"pm.test('Content-Type is application/json', function() { pm.response.headers.has('application/json') });",
+									"",
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function(instance, index) {",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'objective', 'name', 'id', 'href' ];",
+									"    pm.test('Instance ' +index+ ' has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has objective attribute', function() { pm.expect(instance.objective).to.be.a('array'); });",
+									"    ",
+									"    pm.test('Response has name attribute', function() { pm.expect(instance.name).to.be.a('string'); });",
+									"    ",
+									"",
+									"    ",
+									"",
+									"  });",
+									"}",
+									"else {",
+									"    var instance = pm.response.json();",
+									"    ",
+									"    var requiredAttributes = [ 'objective', 'name', 'id', 'href' ];",
+									"    pm.test('Instance has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"      ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has objective attribute', function() { pm.expect(instance.objective).to.be.a('array'); });",
+									"    ",
+									"    pm.test('Response has name attribute', function() { pm.expect(instance.name).to.be.a('string'); });",
+									"    ",
+									"",
+									"}",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"pm.test(\"ID1 found on body\", function () {",
+									"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"IDSQMS1\"));",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelSpecification",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelSpecification"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"_postman_id": "70eb4dc1-741e-4972-88e4-98c48a7b1ead",
+			"name": "TC_SQM2_N2 – Create new service Level Specification with minimum set of parameters supported by server",
+			"item": [
+				{
+					"_postman_id": "33f6839b-40a1-4416-8980-60118485c03d",
+					"name": "/serviceLevelSpecification",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5db2d058-670e-4a88-ab4d-f6988b60b5cc",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test('Content-Type is present', function() { pm.response.to.have.header('Content-Type') });",
+									"pm.test('Content-Type is application/json', function() { pm.response.headers.has('application/json') });",
+									"//Response Code 201-Created",
+									"pm.test(\"Status code is 201 (Conformance Profile page 16)\", function () { pm.response.to.have.status(201); });",
+									"",
+									"",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function(instance, index) {",
+									"      ",
+									"      ",
+									"    pm.globals.set(\"IDSQMS2\", instance.id);",
+									"    pm.globals.set(\"NAMESQMS2\", instance.name);",
+									"    pm.globals.set(\"HREFSQMS2\", instance.href);",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'objective', 'name', 'id', 'href' ];",
+									"    pm.test('Instance ' +index+ ' has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has objective attribute', function() { pm.expect(instance.objective).to.be.a('array'); });",
+									"    ",
+									"    pm.test('Response has name attribute', function() { pm.expect(instance.name).to.be.a('string'); });",
+									"    ",
+									"    pm.test(\"Location on header matches expected\", function (){",
+									"        pm.expect(pm.response.headers.get(\"Location\")).to.equal(request.url + \"/\" +pm.globals.get(\"IDSQMS2\"));",
+									"    });",
+									"    ",
+									"",
+									"  });",
+									"}",
+									"else {",
+									"    var instance = pm.response.json();",
+									"    ",
+									"    pm.globals.set(\"IDSQMS2\", instance.id);",
+									"    pm.globals.set(\"NAMESQMS2\", instance.name);",
+									"    pm.globals.set(\"HREFSQMS2\", instance.href);",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'objective', 'name', 'id', 'href' ];",
+									"    pm.test('Instance has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"      ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has objective attribute', function() { pm.expect(instance.objective).to.be.a('array'); });",
+									"    ",
+									"    pm.test('Response has name attribute', function() { pm.expect(instance.name).to.be.a('string'); });",
+									"    ",
+									"    pm.test(\"Location on header matches expected\", function (){",
+									"        pm.expect(pm.response.headers.get(\"Location\")).to.equal(request.url + \"/\" +pm.globals.get(\"IDSQMS2\"));",
+									"    });",
+									"}",
+									"",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"serviceLevelSpecification2\",\n\t\"name\": \"serviceLevelSpecification1\",\n\t\"objective\":[{\n\t\t\"id\":\"object2\",\n\t\t\"href\":\"/object2\"\n\t}]\n}"
+						},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelSpecification",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelSpecification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "b79933bf-14c8-4453-91b9-4eb9c4ad70ba",
+					"name": "/serviceLevelSpecification/{{IDSQM2}}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ba2d809a-55fb-4956-bcf9-cbd3746357db",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test('Content-Type is present', function() { pm.response.to.have.header('Content-Type') });",
+									"pm.test('Content-Type is application/json', function() { pm.response.headers.has('application/json') });",
+									"",
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function(instance, index) {",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'objective', 'name', 'id', 'href' ];",
+									"    pm.test('Instance ' +index+ ' has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has objective attribute', function() { pm.expect(instance.objective).to.be.a('array'); });",
+									"    ",
+									"    pm.test('Response has name attribute', function() { pm.expect(instance.name).to.be.a('string'); });",
+									"    ",
+									"",
+									"    ",
+									"",
+									"  });",
+									"}",
+									"else {",
+									"    var instance = pm.response.json();",
+									"    ",
+									"    var requiredAttributes = [ 'objective', 'name', 'id', 'href' ];",
+									"    pm.test('Instance has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"      ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has objective attribute', function() { pm.expect(instance.objective).to.be.a('array'); });",
+									"    ",
+									"    pm.test('Response has name attribute', function() { pm.expect(instance.name).to.be.a('string'); });",
+									"    ",
+									"",
+									"}",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"pm.test(\"ID2 found on body\", function () {",
+									"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"IDSQMS2\"));",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelSpecification/{{IDSQMS2}}",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelSpecification",
+								"{{IDSQMS2}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "54495f2b-2f70-4919-9184-666e81b5b124",
+					"name": "/serviceLevelSpecification",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8e3bdb89-5dc1-41b0-b6ac-b27d85ea247e",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test('Content-Type is present', function() { pm.response.to.have.header('Content-Type') });",
+									"pm.test('Content-Type is application/json', function() { pm.response.headers.has('application/json') });",
+									"",
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function(instance, index) {",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'objective', 'name', 'id', 'href' ];",
+									"    pm.test('Instance ' +index+ ' has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has objective attribute', function() { pm.expect(instance.objective).to.be.a('array'); });",
+									"    ",
+									"    pm.test('Response has name attribute', function() { pm.expect(instance.name).to.be.a('string'); });",
+									"    ",
+									"",
+									"    ",
+									"",
+									"  });",
+									"}",
+									"else {",
+									"    var instance = pm.response.json();",
+									"    ",
+									"    var requiredAttributes = [ 'objective', 'name', 'id', 'href' ];",
+									"    pm.test('Instance has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"      ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has objective attribute', function() { pm.expect(instance.objective).to.be.a('array'); });",
+									"    ",
+									"    pm.test('Response has name attribute', function() { pm.expect(instance.name).to.be.a('string'); });",
+									"    ",
+									"",
+									"}",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"pm.test(\"ID1 found on body\", function () {",
+									"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"IDSQMS1\"));",
+									"});",
+									"",
+									"pm.test(\"ID1 found on body\", function () {",
+									"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"IDSQMS2\"));",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelSpecification",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelSpecification"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"_postman_id": "d8b38696-8d6a-4d66-b265-ef0e87266954",
+			"name": "TC_SQM2_N3 – Search for ServiceLevelSpecifications with specific characteristics",
+			"item": [
+				{
+					"_postman_id": "eeb8e266-9702-4bf0-b082-fd2a6c3d17b6",
+					"name": "/serviceLevelSpecification",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a424f443-8308-4b4e-b1ae-21e6ddb48135",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test('Content-Type is present', function() { pm.response.to.have.header('Content-Type') });",
+									"pm.test('Content-Type is application/json', function() { pm.response.headers.has('application/json') });",
+									"",
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function(instance, index) {",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'objective', 'name', 'id', 'href' ];",
+									"    pm.test('Instance ' +index+ ' has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has objective attribute', function() { pm.expect(instance.objective).to.be.a('array'); });",
+									"    ",
+									"    pm.test('Response has name attribute', function() { pm.expect(instance.name).to.be.a('string'); });",
+									"    ",
+									"",
+									"    ",
+									"",
+									"  });",
+									"}",
+									"else {",
+									"    var instance = pm.response.json();",
+									"    ",
+									"    var requiredAttributes = [ 'objective', 'name', 'id', 'href' ];",
+									"    pm.test('Instance has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"      ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has objective attribute', function() { pm.expect(instance.objective).to.be.a('array'); });",
+									"    ",
+									"    pm.test('Response has name attribute', function() { pm.expect(instance.name).to.be.a('string'); });",
+									"    ",
+									"    if (instance.id == pm.globals.get(\"IDSQMS1\")){",
+									"        pm.test('Reponse ID matches POST', function(){",
+									"           pm.expect(instance.id).to.eql(pm.globals.get(\"IDSQMS1\")); ",
+									"        });",
+									"        pm.test('Reponse name matches POST', function(){",
+									"           pm.expect(instance.conformanceTarget).to.eql(pm.globals.get(\"NAMESQMS1\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Comparator matches POST', function(){",
+									"           pm.expect(instance.conformanceComparator).to.eql(pm.globals.get(\"OBJECTIVESQMS1\")); ",
+									"        });",
+									"        pm.test('Reponse HREF matches POST', function(){",
+									"           pm.expect(instance.href).to.eql(pm.globals.get(\"HREFSQMS1\")); ",
+									"        });",
+									"        ",
+									"    }",
+									"    if (instance.id == pm.globals.get(\"IDSQMS2\")){",
+									"        pm.test('Reponse ID matches POST', function(){",
+									"           pm.expect(instance.id).to.eql(pm.globals.get(\"IDSQMS2\")); ",
+									"        });",
+									"        pm.test('Reponse name matches POST', function(){",
+									"           pm.expect(instance.conformanceTarget).to.eql(pm.globals.get(\"NAMESQMS2\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Comparator matches POST', function(){",
+									"           pm.expect(instance.conformanceComparator).to.eql(pm.globals.get(\"OBJECTIVESQMS2\")); ",
+									"        });",
+									"        pm.test('Reponse HREF matches POST', function(){",
+									"           pm.expect(instance.href).to.eql(pm.globals.get(\"HREFSQMS2\")); ",
+									"        });",
+									"        ",
+									"    }",
+									"",
+									"}",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"pm.test(\"ID1 found on body\", function () {",
+									"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"IDSQMS1\"));",
+									"});",
+									"",
+									"pm.test(\"ID1 found on body\", function () {",
+									"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"IDSQMS2\"));",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelSpecification",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelSpecification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "cc86dd37-c76d-4e3e-b215-b072509ab325",
+					"name": "/serviceLevelSpecification?name=serviceLevelSpecification1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2bb138f9-17b3-4dd4-9094-4315f6bcfaee",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test('Content-Type is present', function() { pm.response.to.have.header('Content-Type') });",
+									"pm.test('Content-Type is application/json', function() { pm.response.headers.has('application/json') });",
+									"",
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function(instance, index) {",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'objective', 'name', 'id', 'href' ];",
+									"    pm.test('Instance ' +index+ ' has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has objective attribute', function() { pm.expect(instance.objective).to.be.a('array'); });",
+									"    ",
+									"    pm.test('Response has name attribute', function() { pm.expect(instance.name).to.be.a('string'); });",
+									"    ",
+									"",
+									"    ",
+									"",
+									"  });",
+									"}",
+									"else {",
+									"    var instance = pm.response.json();",
+									"    ",
+									"    var requiredAttributes = [ 'objective', 'name', 'id', 'href' ];",
+									"    pm.test('Instance has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"      ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has objective attribute', function() { pm.expect(instance.objective).to.be.a('array'); });",
+									"    ",
+									"    pm.test('Response has name attribute', function() { pm.expect(instance.name).to.be.a('string'); });",
+									"    ",
+									"    if (instance.id == pm.globals.get(\"IDSQMS1\")){",
+									"        pm.test('Reponse ID matches POST', function(){",
+									"           pm.expect(instance.id).to.eql(pm.globals.get(\"IDSQMS1\")); ",
+									"        });",
+									"        pm.test('Reponse name matches POST', function(){",
+									"           pm.expect(instance.conformanceTarget).to.eql(pm.globals.get(\"NAMESQMS1\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Comparator matches POST', function(){",
+									"           pm.expect(instance.conformanceComparator).to.eql(pm.globals.get(\"OBJECTIVESQMS1\")); ",
+									"        });",
+									"        pm.test('Reponse HREF matches POST', function(){",
+									"           pm.expect(instance.href).to.eql(pm.globals.get(\"HREFSQMS1\")); ",
+									"        });",
+									"        ",
+									"    }",
+									"    if (instance.id == pm.globals.get(\"IDSQMS2\")){",
+									"        pm.test('ID2 should not be returned by this GET', function(){",
+									"           pm.expect(0).to.eql(1); ",
+									"        });",
+									"       ",
+									"        ",
+									"    }",
+									"",
+									"}",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"pm.test(\"ID1 found on body\", function () {",
+									"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"IDSQMS1\"));",
+									"});",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelSpecification?name=serviceLevelSpecification1",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelSpecification"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "serviceLevelSpecification1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "c7cd31ca-c648-49d7-9927-899f6e48e259",
+					"name": "/serviceLevelSpecification?objective.id=object2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a2f9fb6-2ad0-4d04-83c1-8ec366110c35",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test('Content-Type is present', function() { pm.response.to.have.header('Content-Type') });",
+									"pm.test('Content-Type is application/json', function() { pm.response.headers.has('application/json') });",
+									"",
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function(instance, index) {",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'objective', 'name', 'id', 'href' ];",
+									"    pm.test('Instance ' +index+ ' has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has objective attribute', function() { pm.expect(instance.objective).to.be.a('array'); });",
+									"    ",
+									"    pm.test('Response has name attribute', function() { pm.expect(instance.name).to.be.a('string'); });",
+									"    ",
+									"",
+									"    ",
+									"",
+									"  });",
+									"}",
+									"else {",
+									"    var instance = pm.response.json();",
+									"    ",
+									"    var requiredAttributes = [ 'objective', 'name', 'id', 'href' ];",
+									"    pm.test('Instance has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"      ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has objective attribute', function() { pm.expect(instance.objective).to.be.a('array'); });",
+									"    ",
+									"    pm.test('Response has name attribute', function() { pm.expect(instance.name).to.be.a('string'); });",
+									"    ",
+									"    if (instance.id == pm.globals.get(\"IDSQMS1\")){",
+									"        pm.test('ID1 should not be returned by this GET', function(){",
+									"           pm.expect(0).to.eql(1); ",
+									"        });",
+									"        ",
+									"    }",
+									"    if (instance.id == pm.globals.get(\"IDSQMS2\")){",
+									"        pm.test('Reponse ID matches POST', function(){",
+									"           pm.expect(instance.id).to.eql(pm.globals.get(\"IDSQMS2\")); ",
+									"        });",
+									"        pm.test('Reponse name matches POST', function(){",
+									"           pm.expect(instance.conformanceTarget).to.eql(pm.globals.get(\"NAMESQMS2\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Comparator matches POST', function(){",
+									"           pm.expect(instance.conformanceComparator).to.eql(pm.globals.get(\"OBJECTIVESQMS2\")); ",
+									"        });",
+									"        pm.test('Reponse HREF matches POST', function(){",
+									"           pm.expect(instance.href).to.eql(pm.globals.get(\"HREFSQMS2\")); ",
+									"        });",
+									"        ",
+									"    }",
+									"",
+									"}",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"pm.test(\"ID1 found on body\", function () {",
+									"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"IDSQMS2\"));",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelSpecification?objective.id=object2",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelSpecification"
+							],
+							"query": [
+								{
+									"key": "objective.id",
+									"value": "object2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"_postman_id": "752e25de-45b0-4270-92be-7882381cd003",
+			"name": "TC_SQM2_N4 – Filtered retrieval of a Service Level Specification",
+			"item": [
+				{
+					"_postman_id": "5fd06fab-b4a3-4f0d-9a2e-c142266fe08b",
+					"name": "/serviceLevelSpecification/{{IDSQMS1}}?fields=name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1b834332-54b3-4092-aa27-3dc815e9ebbd",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test('Content-Type is present', function() { pm.response.to.have.header('Content-Type') });",
+									"pm.test('Content-Type is application/json', function() { pm.response.headers.has('application/json') });",
+									"",
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+									"",
+									"",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function(instance, index) {",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'name'];",
+									"    pm.test('Instance ' +index+ ' has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Only conformanceTarget on response', function(){",
+									"       pm.expect(Object.keys(instance).length).to.eql(requiredAttributes.length);",
+									"    });",
+									"    ",
+									"    pm.test('Response has name attribute', function() { pm.expect(instance.name).to.be.a('string'); });",
+									"    ",
+									"",
+									"  ",
+									"    pm.test('Reponse name matches POST', function(){",
+									"       pm.expect(instance.name).to.eql(pm.globals.get('NAMESQMS1')); ",
+									"    });",
+									"",
+									"",
+									"",
+									"  });",
+									"}",
+									"else {",
+									"    var instance = pm.response.json();",
+									"    ",
+									"    ",
+									"    ",
+									"",
+									"    var requiredAttributes = [ 'name'];",
+									"    pm.test('Instance has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Only conformanceTarget on response', function(){",
+									"       pm.expect(Object.keys(instance).length).to.eql(requiredAttributes.length);",
+									"    });",
+									"    ",
+									"    pm.test('Response has name attribute', function() { pm.expect(instance.name).to.be.a('string'); });",
+									"    ",
+									"",
+									"  ",
+									"    pm.test('Reponse name matches POST', function(){",
+									"       pm.expect(instance.name).to.eql(pm.globals.get('NAMESQMS1')); ",
+									"    });",
+									"    ",
+									"}",
+									"",
+									"",
+									"",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelSpecification/{{IDSQMS1}}?fields=name",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelSpecification",
+								"{{IDSQMS1}}"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "name"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"_postman_id": "18933168-17bb-45c0-a34d-a6b75d5f9649",
+					"name": "/serviceLevelSpecification/{{IDSQMS2}}?fields=objective,name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "df601d2b-6a1b-4f98-8723-e7cebcedff58",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test('Content-Type is present', function() { pm.response.to.have.header('Content-Type') });",
+									"pm.test('Content-Type is application/json', function() { pm.response.headers.has('application/json') });",
+									"",
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+									"",
+									"",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function(instance, index) {",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'name', 'objective'];",
+									"    pm.test('Instance ' +index+ ' has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Only name and objective on response', function(){",
+									"       pm.expect(Object.keys(instance).length).to.eql(requiredAttributes.length);",
+									"    });",
+									"    ",
+									"    pm.test('Response has name attribute', function() { pm.expect(instance.name).to.be.a('string'); });",
+									"    ",
+									"",
+									"  ",
+									"    pm.test('Reponse name matches POST', function(){",
+									"       pm.expect(instance.name).to.eql(pm.globals.get('NAMESQMS1')); ",
+									"    });",
+									"",
+									"",
+									"",
+									"  });",
+									"}",
+									"else {",
+									"    var instance = pm.response.json();",
+									"    ",
+									"    ",
+									"    ",
+									"",
+									"    var requiredAttributes = [ 'name', 'objective'];",
+									"    pm.test('Instance has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Only name and objective on response', function(){",
+									"       pm.expect(Object.keys(instance).length).to.eql(requiredAttributes.length);",
+									"    });",
+									"    ",
+									"    pm.test('Response has name attribute', function() { pm.expect(instance.name).to.be.a('string'); });",
+									"    ",
+									"",
+									"  ",
+									"    pm.test('Reponse name matches POST', function(){",
+									"       pm.expect(instance.name).to.eql(pm.globals.get('NAMESQMS1')); ",
+									"    });",
+									"    ",
+									"    pm.test('Response has objective attribute', function() { pm.expect(instance.objective).to.be.a('array'); });",
+									"    ",
+									"",
+									"    ",
+									"}",
+									"",
+									"",
+									"",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelSpecification/{{IDSQMS2}}?fields=objective,name",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelSpecification",
+								"{{IDSQMS2}}"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "objective,name"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"_postman_id": "a8250ef3-1e71-4958-93ff-220e8c85a903",
+			"name": "TC_SQM2_N5 – Filtered Search and Filtered data response",
+			"item": [
+				{
+					"_postman_id": "5ec444b4-ed0b-46f8-8fd3-6b7db670a627",
+					"name": "/serviceLevelSpecification?name=serviceLevelSpecification1&objective.id=object1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6773230c-886c-47c6-a5a7-fac29895c732",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test('Content-Type is present', function() { pm.response.to.have.header('Content-Type') });",
+									"pm.test('Content-Type is application/json', function() { pm.response.headers.has('application/json') });",
+									"",
+									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function(instance, index) {",
+									"    ",
+									"    ",
+									"    var requiredAttributes = [ 'objective', 'name', 'id', 'href' ];",
+									"    pm.test('Instance ' +index+ ' has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has objective attribute', function() { pm.expect(instance.objective).to.be.a('array'); });",
+									"    ",
+									"    pm.test('Response has name attribute', function() { pm.expect(instance.name).to.be.a('string'); });",
+									"    ",
+									"",
+									"    ",
+									"",
+									"  });",
+									"}",
+									"else {",
+									"    var instance = pm.response.json();",
+									"    ",
+									"    var requiredAttributes = [ 'objective', 'name', 'id', 'href' ];",
+									"    pm.test('Instance has all mandatory attributes', function() { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) } );",
+									"",
+									"    ",
+									"      ",
+									"    pm.test('Response has id attribute', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response has href attribute', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    ",
+									"    pm.test('Response has objective attribute', function() { pm.expect(instance.objective).to.be.a('array'); });",
+									"    ",
+									"    pm.test('Response has name attribute', function() { pm.expect(instance.name).to.be.a('string'); });",
+									"    ",
+									"    if (instance.id == pm.globals.get(\"IDSQMS1\")){",
+									"        pm.test('Reponse ID matches POST', function(){",
+									"           pm.expect(instance.id).to.eql(pm.globals.get(\"IDSQMS1\")); ",
+									"        });",
+									"        pm.test('Reponse name matches POST', function(){",
+									"           pm.expect(instance.conformanceTarget).to.eql(pm.globals.get(\"NAMESQMS1\")); ",
+									"        });",
+									"        pm.test('Reponse Conformance Comparator matches POST', function(){",
+									"           pm.expect(instance.conformanceComparator).to.eql(pm.globals.get(\"OBJECTIVESQMS1\")); ",
+									"        });",
+									"        pm.test('Reponse HREF matches POST', function(){",
+									"           pm.expect(instance.href).to.eql(pm.globals.get(\"HREFSQMS1\")); ",
+									"        });",
+									"        ",
+									"    }",
+									"    if (instance.id == pm.globals.get(\"IDSQMS2\")){",
+									"        pm.test('ID2 should not be returned by this GET', function(){",
+									"           pm.expect(0).to.eql(1); ",
+									"        });",
+									"       ",
+									"        ",
+									"    }",
+									"",
+									"}",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"pm.test(\"ID1 found on body\", function () {",
+									"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"IDSQMS1\"));",
+									"});",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelSpecification?name=serviceLevelSpecification1&objective.id=object1",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelSpecification"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "serviceLevelSpecification1"
+								},
+								{
+									"key": "objective.id",
+									"value": "object1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"_postman_id": "9ab37e76-fb40-4c1f-89a2-2a986a369ccc",
+			"name": "TC_SQM2_E1 – Unknown Service Level Specification identifier",
+			"item": [
+				{
+					"_postman_id": "6fb5a9ed-7818-49fc-8fb6-723baaa6e46a",
+					"name": "/serviceLevelSpecification/123414213123",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4cdf9d75-8ed9-4d4d-976c-ac4074fab759",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () { pm.response.to.have.status(404); });",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelSpecification/123414213123",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelSpecification",
+								"123414213123"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"_postman_id": "97fb6caf-2d95-462e-8afe-e2460b612dfd",
+			"name": "TC_SQM2_E2 – Invalid Request – Missing mandatory parameter",
+			"item": [
+				{
+					"_postman_id": "e383215f-a95a-497f-8efa-00e9e080d672",
+					"name": "/serviceLevelSpecification",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d56ef0c6-cb0d-4012-8653-51465007b94e",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () { pm.response.to.have.status(400); });",
+									"",
+									"",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"name\": \"serviceLevelSpecification1\"\n}"
+						},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelSpecification",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelSpecification"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"_postman_id": "d6a1a367-c0dd-44b5-b505-70894eab2186",
+			"name": "TC_SQM2_E3 – Invalid Request – Missing parameter mandatory in objective",
+			"item": [
+				{
+					"_postman_id": "22e51665-8478-442d-9c2e-5d8b3c7facff",
+					"name": "/serviceLevelSpecification",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d56ef0c6-cb0d-4012-8653-51465007b94e",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () { pm.response.to.have.status(400); });",
+									"",
+									"",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"name\": \"testserviceLevelSpecification\",\n\"objective\":[{\n\"href\":\"/dffdjk\"\n}]\n}"
+						},
+						"url": {
+							"raw": "{{ServiceQualityManagementAPI}}/serviceLevelSpecification",
+							"host": [
+								"{{ServiceQualityManagementAPI}}"
+							],
+							"path": [
+								"serviceLevelSpecification"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
